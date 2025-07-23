@@ -7,7 +7,7 @@ from time import sleep
 BASE_URL = "https://data.cityofnewyork.us/resource/biws-g3hs.json"  # 2017 dataset
 ROWS_PER_PAGE = 1000
 MAX_PAGES = 500  # ~500,000 rows max (adjust as needed)
-STORAGE_PATH = "/mnt/nyc-taxi/bronze/trips_2017"
+STORAGE_PATH = "/mnt/nyctaxi/bronze/trips_2017"
 
 # --- FETCH FUNCTION ---
 def fetch_api_data(base_url, rows_per_page=1000, max_pages=100):
