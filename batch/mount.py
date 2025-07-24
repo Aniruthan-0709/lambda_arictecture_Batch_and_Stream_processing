@@ -1,11 +1,18 @@
-# Define variables
-container_name = "nyc-taxi"  # or create it if not yet created
-storage_account_name = "lamdadatalake"
-sas_token = r"?sp=racwdl&st=2025-07-22T23:13:04Z&se=2025-07-23T07:28:04Z&spr=https&sv=2024-11-04&sr=c&sig=CKbO%2BL71zv%2Fp1Dep0QnEsFDqzuBZT1f25RW1eG174fQ%3D"
+# Define storage parameters
+container_name = "lambda"
+storage_account_name = "lambdlake"
+sas_token = r"sp=r&st=2025-07-24T22:43:44Z&se=2025-07-25T06:58:44Z&spr=https&sv=2024-11-04&sr=c&sig=%2FNyYRM7BA17FlghkfYsnXqz5ddSLByfF%2F4moLtR5oO8%3D"
 
-# Mount the container
+# Define Databricks mount path
+mount_point = "/mnt/lambda"
+
+# Perform the mount
 dbutils.fs.mount(
   source = f"wasbs://{container_name}@{storage_account_name}.blob.core.windows.net/",
-  mount_point = f"/mnt/nyc-taxi",
-  extra_configs = {f"fs.azure.sas.{container_name}.{storage_account_name}.blob.core.windows.net": sas_token}
+  mount_point = mount_point,
+  extra_configs = {
+    f"fs.azure.sas.{container_name}.{storage_account_name}.blob.core.windows.net": sas_token
+  }
 )
+
+print("Mounted 'lambda' container from 'lambdlake' to /mnt/lambda")
